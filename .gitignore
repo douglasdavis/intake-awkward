@@ -3,6 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+src/intake_awkward/_version.py
+
 .DS_Store
 
 # C extensions
