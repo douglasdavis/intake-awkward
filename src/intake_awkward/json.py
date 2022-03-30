@@ -49,15 +49,19 @@ class JSONSource(DataSource):
 
     def to_dask(self) -> Array:
         self._get_schema()
+        assert self._array is not None
         return self._array
 
     def _get_partition(self, i: int) -> AwkwardArray:
+        self._get_schema()
+        assert self._array is not None
         return self._array.partitions[i].compute()
 
     def read_partition(self, i) -> AwkwardArray:
-        self._get_schema()
+        assert self._array is not None
         return self._get_partition(i)
 
     def read(self) -> AwkwardArray:
         self._get_schema()
+        assert self._array is not None
         return self._array.compute()

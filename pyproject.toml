@@ -24,23 +24,11 @@ files = ["src"]
 warn_unused_configs = true
 
 [[tool.mypy.overrides]]
-module = ["dask.*"]
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
 module = ["awkward.*"]
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
-module = ["IPython.*"]
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = ["fsspec.*"]
-ignore_missing_imports = true
-
-[[tool.mypy.overrides]]
-module = ["ujson.*"]
+module = ["intake.*"]
 ignore_missing_imports = true
 
 [tool.pyright]
