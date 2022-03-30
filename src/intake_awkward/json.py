@@ -24,9 +24,8 @@ class JSONSource(DataSource):
         metadata: Any = None,
         **kwargs: Any,
     ) -> None:
-        super().__init__(metadata=metadata)
+        super().__init__(metadata=metadata, storage_options=storage_options or {})
         self.urlpath = urlpath
-        self.storage_options = storage_options or {}
         self._array: Array | None = None
         self.npartitions: int | None = None
         self.kwargs = kwargs
@@ -47,15 +46,15 @@ class JSONSource(DataSource):
             extra_metadata=self.metadata,
         )
 
-    def to_dask(self) -> Array:
-        self._get_schema()
-        assert self._array is not None
-        return self._array
-
     def _get_partition(self, i: int) -> AwkwardArray:
         self._get_schema()
         assert self._array is not None
         return self._array.partitions[i].compute()
+
+    def to_dask(self) -> Array:
+        self._get_schema()
+        assert self._array is not None
+        return self._array
 
     def read_partition(self, i) -> AwkwardArray:
         assert self._array is not None
@@ -65,3 +64,6 @@ class JSONSource(DataSource):
         self._get_schema()
         assert self._array is not None
         return self._array.compute()
+
+    def close(self) -> None:
+        pass
