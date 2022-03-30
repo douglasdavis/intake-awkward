@@ -8,6 +8,11 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 write_to = "src/intake_awkward/_version.py"
 
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = ["-v", "-ra", "--showlocals", "--strict-markers", "--strict-config"]
+testpaths = ["tests"]
+
 [tool.isort]
 profile = "black"
 line_length = 88
