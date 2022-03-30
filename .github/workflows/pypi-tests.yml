@@ -27,7 +27,7 @@ jobs:
     - name: install
       run: |
         pip install pip setuptools wheel -U
-        pip install --ignore-installed -q --no-cache-dir -e .
+        pip install --ignore-installed -q --no-cache-dir -e .[complete]
         pip list
     - name: test
       run: |
