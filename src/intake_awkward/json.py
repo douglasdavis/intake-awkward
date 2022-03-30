@@ -12,10 +12,10 @@ if TYPE_CHECKING:
 
 
 class JSONSource(DataSource):
+    name = "awkward"
     version: str = __version__
-    container: str = "awkward"
+    container: str = "awkward-array"
     partition_access: bool = True
-    container = "awkward-array"
 
     def __init__(
         self,
