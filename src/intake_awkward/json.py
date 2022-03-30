@@ -12,9 +12,9 @@ if TYPE_CHECKING:
 
 
 class JSONSource(DataSource):
-    name = "awkward"
+    name = "awkward_json"
     version: str = __version__
-    container: str = "awkward-array"
+    container: str = "awkward"
     partition_access: bool = True
 
     def __init__(
@@ -44,6 +44,7 @@ class JSONSource(DataSource):
         return Schema(
             npartitions=self.npartitions,
             extra_metadata=self.metadata,
+            dtype=repr(self._array._meta),
         )
 
     def _get_partition(self, i: int) -> AwkwardArray:
