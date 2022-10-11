@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-src/intake_awkward/_version.py
+src/intake_awkward/version.py
 
 .DS_Store
 

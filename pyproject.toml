@@ -1,12 +1,51 @@
 [build-system]
-requires = [
-    "setuptools>=45.0",
-    "setuptools_scm[toml]>=4.2.0"
-]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
 
-[tool.setuptools_scm]
-write_to = "src/intake_awkward/_version.py"
+[project]
+name = "intake-awkward"
+description = "Intake for Awkward"
+readme = "README.md"
+license = "BSD-3-Clause"
+requires-python = ">=3.8"
+authors = [
+    { name = "Doug Davis", email = "ddavis@ddavis.io" },
+]
+classifiers = [
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "dask-awkward",
+    "intake>=0.6.5",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+complete = ["pytest>=6.0"]
+test = ["pytest>=6.0"]
+
+[project.urls]
+Homepage = "https://github.com/douglasdavis/intake-awkward"
+
+[project.entry-points."intake.drivers"]
+awkward_json = "intake_awkward.json:JSONSource"
+
+[tool.hatch.version]
+source = "vcs"
+path = "src/intake_awkward/__init__.py"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/intake_awkward/version.py"
+
+[tool.hatch.build.targets.sdist]
+include = ["/src"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
