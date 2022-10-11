@@ -7,8 +7,8 @@ from intake.source.base import DataSource, Schema
 from intake_awkward import __version__
 
 if TYPE_CHECKING:
-    from awkward._v2.highlevel import Array as AwkwardArray
-    from dask_awkward.core import Array
+    import awkward as ak
+    from dask_awkward.lib.core import Array
 
 
 class JSONSource(DataSource):
@@ -47,7 +47,7 @@ class JSONSource(DataSource):
             dtype=repr(self._array._meta),
         )
 
-    def _get_partition(self, i: int) -> AwkwardArray:
+    def _get_partition(self, i: int) -> ak.Array:
         self._get_schema()
         assert self._array is not None
         return self._array.partitions[i].compute()
@@ -57,11 +57,11 @@ class JSONSource(DataSource):
         assert self._array is not None
         return self._array
 
-    def read_partition(self, i) -> AwkwardArray:
+    def read_partition(self, i) -> ak.Array:
         assert self._array is not None
         return self._get_partition(i)
 
-    def read(self) -> AwkwardArray:
+    def read(self) -> ak.Array:
         self._get_schema()
         assert self._array is not None
         return self._array.compute()
