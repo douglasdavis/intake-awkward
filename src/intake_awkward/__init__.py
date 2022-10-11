@@ -1,1 +1,1 @@
-from intake_awkward.version as __version__  # noqa
+from intake_awkward.version import __version__  # noqa
